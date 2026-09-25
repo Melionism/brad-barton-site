@@ -1,0 +1,45 @@
+---
+import { contact, socials, socialOrder } from '../content/site';
+import Icons from './Icons.astro';
+---
+<section class="section" id="contact">
+  <div class="wrap contact reveal">
+    <div>
+      <p class="label">{contact.label}</p>
+      <h2 class="h2">{contact.heading}</h2>
+      <p class="lead contact__text">{contact.text}</p>
+    </div>
+
+    <div>
+      {contact.formEndpoint ? (
+        <form class="contact__form" action={contact.formEndpoint} method="POST">
+          <label>Name<input name="name" required autocomplete="name" /></label>
+          <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+          <label>Message<textarea name="message" rows="5" required></textarea></label>
+          <button class="btn btn--primary" type="submit">Send<Icons name="arrow" /></button>
+        </form>
+      ) : (
+        <ul class="contact__links">
+          {socialOrder.map((k) => (
+            <li>
+              <a class="btn btn--ghost" href={socials[k].url} target="_blank" rel="noopener"><Icons name={k} />{socials[k].label}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+  .contact__text { margin-top: 22px; }
+  .contact__links { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .contact__links .btn { width: 100%; justify-content: center; }
+  .contact__form { display: grid; gap: 14px; }
+  .contact__form label { display: grid; gap: 6px; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 15px; }
+  .contact__form input, .contact__form textarea { padding: 12px 14px; border: 2px solid var(--ink); border-radius: 4px; background: #fbf7ee; font-family: var(--font); font-size: 17px; text-transform: none; letter-spacing: 0; }
+  .contact__form .btn { justify-self: start; }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+  @media (max-width: 400px) { .contact__links { grid-template-columns: 1fr; } }
+</style>

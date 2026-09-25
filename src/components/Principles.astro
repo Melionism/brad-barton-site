@@ -1,0 +1,41 @@
+---
+import { principles } from '../content/site';
+---
+<section class="section board" id="principles">
+  <div class="wrap reveal">
+    <p class="label board__label">{principles.label}</p>
+    <h2 class="board__words">
+      {principles.words.map((w) => <span>{w}</span>)}
+    </h2>
+    <p class="lead board__text">{principles.text}</p>
+  </div>
+</section>
+
+<style>
+  .board {
+    color: var(--chalk);
+    /* фото доски со схемой розыгрыша (сгенерировано); слева затемнение под текст */
+    background:
+      linear-gradient(90deg, rgba(20, 28, 25, 0.9) 0%, rgba(20, 28, 25, 0.6) 45%, rgba(20, 28, 25, 0.15) 100%),
+      url('/img/bg-board.webp') 70% 50% / cover no-repeat,
+      var(--slate);
+    border-top: 14px solid #6b4a2b; /* деревянная рамка доски */
+    border-bottom: 14px solid #6b4a2b;
+    overflow: hidden;
+  }
+  .board .wrap { position: relative; }
+  .board__label { color: var(--chalk-2); }
+  .board__words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px clamp(20px, 3vw, 44px);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(52px, 7.6vw, 112px);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .board__words span { padding-bottom: 12px; border-bottom: 3px solid rgba(235, 232, 222, 0.5); }
+  .board__words span:last-child { color: var(--accent); border-color: var(--accent); }
+  .board__text { margin-top: 36px; color: var(--chalk-2); }
+</style>

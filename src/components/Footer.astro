@@ -1,0 +1,26 @@
+---
+import { nav, socials, socialOrder, footer } from '../content/site';
+---
+<footer class="footer">
+  <div class="wrap footer__in">
+    <a href="#top" class="footer__brand">Brad Barton</a>
+    <nav class="footer__nav" aria-label="Footer">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <div class="footer__social">
+      {socialOrder.map((k) => <a href={socials[k].url} target="_blank" rel="noopener">{socials[k].label}</a>)}
+    </div>
+    <p class="footer__note">{footer.note}</p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--ink); color: var(--chalk-2); padding-block: 48px; font-size: 15px; }
+  .footer__in { display: grid; grid-template-columns: auto 1fr auto; gap: 18px 36px; align-items: center; }
+  .footer__brand { font-family: var(--font-display); font-weight: 800; font-size: 30px; text-transform: uppercase; color: var(--chalk); }
+  .footer__nav, .footer__social { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .footer__social a { color: var(--chalk); }
+  .footer__nav a:hover, .footer__social a:hover { color: var(--accent); }
+  .footer__note { grid-column: 1 / -1; padding-top: 18px; border-top: 1px solid rgba(235, 232, 222, 0.14); }
+  @media (max-width: 860px) { .footer__in { grid-template-columns: 1fr; } }
+</style>

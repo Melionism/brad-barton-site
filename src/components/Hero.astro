@@ -1,0 +1,133 @@
+---
+import { hero } from '../content/site';
+import { imgSize } from '../lib/imgSize';
+import Icons from './Icons.astro';
+const p = imgSize(hero.portrait);
+const [first, ...rest] = hero.name.split(' ');
+---
+<section class="hero" id="top">
+  <!-- разметка площадки: центральный круг и трёхочковая дуга -->
+  <svg class="hero__court" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="3">
+      <circle cx="930" cy="400" r="330" />
+      <circle cx="930" cy="400" r="120" />
+      <line x1="930" y1="-10" x2="930" y2="810" />
+      <path d="M-10 90 H240 A310 310 0 0 1 240 710 H-10" />
+      <rect x="-10" y="270" width="250" height="260" />
+    </g>
+  </svg>
+
+  <div class="wrap hero__in">
+    <div class="hero__text reveal">
+      <h1 class="h1 hero__name"><span>{first}</span><span class="hero__last">{rest.join(' ')}</span></h1>
+      <p class="hero__tagline">
+        {hero.tagline.map((t) => <span>{t}</span>)}
+      </p>
+      <p class="lead hero__lead">{hero.lead}</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}<Icons name="arrow" /></a>
+        <a class="btn btn--ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      </div>
+    </div>
+
+    <figure class="hero__card reveal">
+      <div class="hero__photo">
+        <img src={hero.portrait} alt={hero.portraitAlt} width={p.width} height={p.height} fetchpriority="high" decoding="async" />
+      </div>
+      <figcaption class="hero__plate">
+        <span>{hero.name}</span>
+        <span class="hero__plate-tag">Ol’ Ball Coach</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(40px, 8vh, 96px) clamp(72px, 12vh, 140px);
+    border-bottom: 2px solid var(--ink);
+    background:
+      radial-gradient(ellipse at 78% 50%, rgba(220, 197, 156, 0.55), transparent 60%),
+      var(--paper);
+  }
+  .hero__court {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--accent);
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  .hero__in {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+  }
+  .hero__name { display: flex; flex-direction: column; }
+  .hero__last { color: transparent; -webkit-text-stroke: 2.5px var(--ink); }
+  .hero__tagline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(24px, 2.8vw, 34px);
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .hero__tagline span:nth-child(2) { color: var(--accent-ink); }
+  .hero__lead { margin-top: 18px; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+
+  /* карточка игрока */
+  .hero__card {
+    margin: 0;
+    justify-self: end;
+    width: 100%;
+    max-width: 440px;
+    padding: 14px 14px 0;
+    background: #fbf7ee;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    box-shadow: 10px 10px 0 var(--ink);
+    transform: rotate(1.5deg);
+    transition-delay: 0.12s;
+  }
+  .hero__card.is-in { transform: rotate(1.5deg); }
+  .hero__photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; background: #000; }
+  .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero__plate {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 4px 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .hero__plate-tag {
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: #fff;
+    background: var(--accent-ink);
+    padding: 5px 9px 4px;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 860px) {
+    .hero__in { grid-template-columns: 1fr; }
+    .hero__card { order: -1; justify-self: start; max-width: 300px; box-shadow: 7px 7px 0 var(--ink); }
+    .hero__last { -webkit-text-stroke-width: 2px; }
+    .hero__plate { font-size: 21px; white-space: nowrap; }
+    .hero__plate-tag { font-size: 12px; }
+  }
+</style>

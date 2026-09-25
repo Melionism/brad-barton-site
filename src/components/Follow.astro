@@ -1,0 +1,49 @@
+---
+import { follow, socials, socialOrder } from '../content/site';
+import Icons from './Icons.astro';
+---
+<section class="section follow" id="follow">
+  <div class="wrap reveal">
+    <p class="label follow__label">{follow.label}</p>
+    <h2 class="h2">{follow.heading}</h2>
+    <p class="lead follow__text">{follow.text}</p>
+    <ul class="follow__list">
+      {socialOrder.map((k) => (
+        <li>
+          <a class="follow__btn" href={socials[k].url} target="_blank" rel="noopener">
+            <Icons name={k} />
+            <span>{socials[k].label}</span>
+            <Icons name="arrow" class="follow__arrow" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .follow { background: var(--ink); color: var(--chalk); }
+  .follow__label { color: var(--accent); }
+  .follow__text { margin-top: 22px; color: var(--chalk-2); }
+  .follow__list { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .follow__btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px;
+    border: 2px solid rgba(235, 232, 222, 0.35);
+    border-radius: 6px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .follow__btn :global(svg) { width: 28px; height: 28px; flex: none; }
+  .follow__btn :global(.follow__arrow) { margin-left: auto; width: 22px; height: 22px; transition: transform 0.3s var(--ease); }
+  .follow__btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+  .follow__btn:hover :global(.follow__arrow) { transform: translateX(4px); }
+  @media (max-width: 980px) { .follow__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .follow__list { grid-template-columns: 1fr; } }
+</style>

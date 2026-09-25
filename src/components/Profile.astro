@@ -1,0 +1,57 @@
+---
+import { profile, atom } from '../content/site';
+import Icons from './Icons.astro';
+---
+<section class="section" id="profile">
+  <div class="wrap profile reveal">
+    <div>
+      <p class="label">{profile.label}</p>
+      <h2 class="h2">{profile.heading}</h2>
+    </div>
+    <div class="profile__body">
+      <p class="profile__quote">{profile.text}</p>
+      {atom.show && (
+        <p class="profile__atom">
+          <span>{atom.role}</span>
+          <a href={atom.url} target="_blank" rel="noopener">{atom.urlLabel}<Icons name="external" /></a>
+        </p>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(28px, 6vw, 96px);
+    align-items: start;
+  }
+  .profile__quote {
+    position: relative;
+    font-size: clamp(24px, 2.7vw, 34px);
+    line-height: 1.4;
+    font-weight: 500;
+    padding-left: clamp(20px, 3vw, 36px);
+    border-left: 6px solid var(--accent);
+  }
+  .profile__atom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .profile__atom a { display: inline-flex; align-items: center; gap: 4px; color: var(--accent-ink); border-bottom: 2px solid currentColor; }
+  .profile__atom a:hover { color: var(--ink); }
+  .profile__atom :global(svg) { width: 16px; height: 16px; }
+  @media (max-width: 860px) { .profile { grid-template-columns: 1fr; } }
+</style>

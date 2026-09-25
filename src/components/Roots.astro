@@ -1,0 +1,53 @@
+---
+import { personal, place } from '../content/site';
+---
+<section class="section">
+  <div class="wrap roots">
+    <article class="roots__panel reveal" id="personal">
+      <p class="label">{personal.label}</p>
+      <h2 class="h2 roots__h">{personal.heading}</h2>
+      <p class="lead roots__text">{personal.text}</p>
+    </article>
+
+    <article class="roots__panel roots__panel--place reveal" id="place">
+      <p class="label">{place.label}</p>
+      <div class="route" aria-hidden="true">
+        <div class="route__stop">
+          <span class="route__abbr">{place.from.abbr}</span>
+          <span class="route__city">{place.from.city}</span>
+          <span class="route__state">{place.from.state}</span>
+        </div>
+        <svg class="route__line" viewBox="0 0 200 60" preserveAspectRatio="none">
+          <path d="M4 50 C 60 0, 140 0, 196 50" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="8 9" vector-effect="non-scaling-stroke" />
+        </svg>
+        <div class="route__stop">
+          <span class="route__abbr">{place.now.abbr}</span>
+          <span class="route__city">{place.now.city}</span>
+          <span class="route__state">{place.now.state}</span>
+        </div>
+      </div>
+      <h2 class="roots__place">{place.heading}</h2>
+      <p class="lead roots__text">{place.text}</p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .roots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
+  .roots__panel { padding: clamp(24px, 4vw, 48px); border: 2px solid var(--ink); border-radius: 8px; background: #fbf7ee; }
+  .roots__h { font-size: clamp(44px, 5.4vw, 76px); }
+  .roots__text { margin-top: 20px; }
+  .roots__panel--place { background: var(--ink); color: var(--chalk); }
+  .roots__panel--place .label { color: var(--accent); }
+  .roots__panel--place .lead { color: var(--chalk-2); }
+  .route { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: 12px; }
+  .route__stop { display: flex; flex-direction: column; }
+  .route__stop:last-child { text-align: right; }
+  .route__abbr { font-family: var(--font-display); font-weight: 800; font-size: clamp(64px, 8vw, 110px); line-height: 0.85; }
+  .route__stop:last-child .route__abbr { color: var(--accent); }
+  .route__city { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .route__state { font-size: 15px; color: var(--chalk-2); }
+  .route__line { width: 100%; height: 60px; align-self: start; margin-top: 10px; color: var(--chalk-2); }
+  .roots__place { margin-top: 28px; font-family: var(--font-display); font-weight: 800; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.1; text-transform: uppercase; }
+  @media (max-width: 900px) { .roots { grid-template-columns: 1fr; } }
+</style>

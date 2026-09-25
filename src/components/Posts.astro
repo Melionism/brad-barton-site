@@ -1,0 +1,61 @@
+---
+import { posts, socials } from '../content/site';
+import Icons from './Icons.astro';
+const items = posts.items.slice(0, 9);
+---
+<section class="section posts" id="posts">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="label">{posts.label}</p>
+      <h2 class="h2">{posts.heading}</h2>
+      <p class="lead posts__text">{posts.text}</p>
+    </div>
+
+    {items.length > 0 ? (
+      <ul class="posts__grid reveal">
+        {items.map((p) => (
+          <li>
+            <a class="card note" href={p.url} target="_blank" rel="noopener">
+              <span class="note__meta"><span class="note__type">{p.type}</span><span>{p.date}</span></span>
+              <span class="note__text">{p.excerpt}</span>
+              <span class="note__more">Read on Facebook <Icons name="external" /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <a class="card note note--empty reveal" href={socials.facebook.url} target="_blank" rel="noopener">
+        <span class="note__type">Facebook</span>
+        <span class="note__lead">Read the latest posts on Facebook</span>
+        <span class="note__more">{socials.facebook.handle} <Icons name="external" /></span>
+      </a>
+    )}
+  </div>
+</section>
+
+<style>
+  .posts { background: var(--paper-2); border-block: 2px solid var(--ink); }
+  .posts__text { margin-top: 22px; }
+  .posts__grid { list-style: none; padding: 0; margin: 52px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  /* карточка для заметок в линейку, с красной полевой линией */
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%;
+    padding: 22px 24px 20px 56px;
+    background:
+      linear-gradient(90deg, transparent 38px, rgba(212, 98, 42, 0.4) 38px 40px, transparent 40px),
+      repeating-linear-gradient(180deg, transparent 0 31px, rgba(23, 34, 59, 0.09) 31px 32px),
+      #fbf7ee;
+  }
+  .note__meta { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; color: var(--ink-3); }
+  .note__type { font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+  .note__text { flex: 1; font-size: 18px; line-height: 1.55; }
+  .note__more { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .note__more :global(svg) { width: 18px; height: 18px; }
+  .note--empty { margin-top: 52px; max-width: 720px; gap: 10px; padding-block: 28px; }
+  .note__lead { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 3.6vw, 44px); line-height: 1; text-transform: uppercase; }
+  @media (max-width: 980px) { .posts__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .posts__grid { grid-template-columns: 1fr; } }
+</style>

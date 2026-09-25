@@ -1,0 +1,62 @@
+---
+import { media, socials } from '../content/site';
+import Icons from './Icons.astro';
+const f = media.featured;
+const embed = f && (f.platform === 'youtube' ? `https://www.youtube-nocookie.com/embed/${f.id}` : `https://rumble.com/embed/${f.id}/`);
+---
+<section class="section" id="media">
+  <div class="wrap">
+    <div class="media__head reveal">
+      <p class="label">{media.label}</p>
+      <h2 class="h2">{media.heading}</h2>
+      <p class="lead media__text">{media.text}</p>
+    </div>
+
+    {f && embed && (
+      <div class="media__embed reveal">
+        <iframe src={embed} title={f.title} loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    )}
+
+    <ul class="channels reveal">
+      {media.channels.map((c) => (
+        <li>
+          <a class="card channel" href={socials[c.key].url} target="_blank" rel="noopener">
+            <span class="channel__icon"><Icons name={c.key} /></span>
+            <span class="channel__kind">{c.kind}</span>
+            <span class="channel__name">{socials[c.key].label}</span>
+            <span class="channel__handle">{socials[c.key].handle}</span>
+            <Icons name="external" class="channel__go" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .media__text { margin-top: 22px; }
+  .media__embed { margin-top: 48px; aspect-ratio: 16 / 9; border: 2px solid var(--ink); border-radius: 8px; overflow: hidden; background: #000; box-shadow: 8px 8px 0 var(--ink); }
+  .media__embed iframe { width: 100%; height: 100%; border: 0; }
+  .channels { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .channel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: 24px 22px 22px;
+    border-width: 2px;
+    border-color: var(--ink);
+  }
+  .channel__icon { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 26px; border-radius: 50%; background: var(--ink); color: var(--paper); transition: background 0.25s; }
+  .channel__icon :global(svg) { width: 26px; height: 26px; }
+  .channel:hover .channel__icon { background: var(--accent); }
+  .channel__kind { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+  .channel__name { font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1; text-transform: uppercase; }
+  .channel__handle { font-size: 15px; color: var(--ink-3); overflow-wrap: anywhere; }
+  .channel :global(.channel__go) { position: absolute; top: 22px; right: 20px; width: 22px; height: 22px; transition: transform 0.3s var(--ease); }
+  .channel:hover :global(.channel__go) { transform: translate(3px, -3px); }
+  @media (max-width: 980px) { .channels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .channels { grid-template-columns: 1fr; } .channel__icon { margin-bottom: 14px; } }
+</style>

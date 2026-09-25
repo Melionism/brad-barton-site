@@ -1,0 +1,128 @@
+---
+import { nav, socials, socialOrder } from '../content/site';
+import Icons from './Icons.astro';
+---
+<header class="nav">
+  <div class="wrap nav__in">
+    <a href="#top" class="nav__brand" aria-label="Brad Barton — home">
+      <img class="nav__mark" src="/favicon.png" alt="" width="512" height="512" aria-hidden="true" /><span>Brad Barton</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    <div class="nav__mobile-social">
+      {socialOrder.map((k) => (
+        <a href={socials[k].url} target="_blank" rel="noopener" aria-label={socials[k].label}><Icons name={k} /></a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .nav.is-scrolled { border-color: var(--ink); }
+  .nav__in { display: flex; align-items: center; gap: 24px; height: 68px; }
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav__mark { width: 32px; height: 32px; border-radius: 7px; }
+  .nav__links { display: flex; gap: 2px; margin-inline-start: auto; }
+  .nav__links a {
+    padding: 8px 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav__links a:hover { color: var(--ink); border-color: var(--accent); }
+
+  .nav__burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    align-items: center;
+    cursor: pointer;
+    margin-inline-start: auto;
+  }
+  .nav__burger span { width: 24px; height: 2.5px; background: var(--ink); transition: transform 0.3s var(--ease); }
+  .nav__burger[aria-expanded='true'] span:first-child { transform: translateY(4.75px) rotate(45deg); }
+  .nav__burger[aria-expanded='true'] span:last-child { transform: translateY(-4.75px) rotate(-45deg); }
+
+  .nav__mobile[hidden] { display: none; }
+  .nav__mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 4px var(--gutter) 24px;
+    border-top: 2px solid var(--ink);
+    background: var(--paper);
+  }
+  .nav__mobile a {
+    padding: 12px 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 30px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__mobile-social { display: flex; gap: 8px; padding-top: 16px; }
+  .nav__mobile-social a { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 2px solid var(--ink); border-radius: 4px; }
+  .nav__mobile-social :global(svg) { width: 22px; height: 22px; }
+
+  @media (max-width: 980px) {
+    .nav__links { display: none; }
+    .nav__burger { display: flex; }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.nav');
+  const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+  const menu = document.getElementById('mobile-menu');
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  burger?.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    if (menu) menu.hidden = open;
+  });
+  menu?.querySelectorAll('a[href^="#"]').forEach((a) =>
+    a.addEventListener('click', () => {
+      burger?.setAttribute('aria-expanded', 'false');
+      if (menu) menu.hidden = true;
+    })
+  );
+</script>

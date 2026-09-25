@@ -1,0 +1,76 @@
+---
+import { background } from '../content/site';
+import { imgSize } from '../lib/imgSize';
+const ph = imgSize(background.photo);
+---
+<section class="section bg-sec" id="background">
+  <div class="wrap bg-sec__in">
+    <div class="reveal">
+      <p class="label">{background.label}</p>
+      <h2 class="h2">{background.heading}</h2>
+      <p class="lead bg-sec__text">{background.text}</p>
+    </div>
+
+    <div class="roster reveal" aria-label="Background at a glance">
+      <figure class="roster__photo">
+        <img src={background.photo} alt={background.photoAlt} width={ph.width} height={ph.height} loading="lazy" decoding="async" />
+      </figure>
+      <dl class="roster__list">
+        {background.roster.map((r) => (
+          <div class="roster__row">
+            <dt>{r.k}</dt>
+            <dd>{r.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* паркет спортзала (сгенерировано); слева светлая вуаль под текст */
+  .bg-sec {
+    background:
+      linear-gradient(90deg, rgba(242, 235, 221, 0.9) 0%, rgba(242, 235, 221, 0.72) 50%, rgba(242, 235, 221, 0.2) 100%),
+      url('/img/bg-floor.webp') 50% 50% / cover no-repeat,
+      var(--maple);
+    border-block: 2px solid var(--ink);
+  }
+  .bg-sec__in {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(32px, 6vw, 96px);
+    align-items: center;
+  }
+  .bg-sec__text { margin-top: 24px; color: var(--ink); }
+  .roster {
+    position: relative;
+    background: #fbf7ee;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 12px clamp(20px, 3vw, 32px) 20px;
+    overflow: hidden;
+  }
+  .roster__photo { margin: 0 calc(-1 * clamp(20px, 3vw, 32px) + 12px) 12px; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; }
+  .roster__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 35%; }
+  .roster__list { margin: 0; }
+  .roster__row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid var(--line-2);
+  }
+  .roster__row dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  .roster__row dd { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.1; text-transform: uppercase; }
+  @media (max-width: 860px) { .bg-sec__in { grid-template-columns: 1fr; } }
+</style>
