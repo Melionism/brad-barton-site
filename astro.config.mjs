@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// SITE_URL задаётся при сборке (Docker build-arg). Пока домена нет — плейсхолдер.
-const site = process.env.SITE_URL || 'https://bradbarton.com';
+// SITE_URL задаётся при сборке (Docker build-arg). Домен: bradbarton.link
+const site = process.env.SITE_URL || 'https://bradbarton.link';
 
 export default defineConfig({
   site,

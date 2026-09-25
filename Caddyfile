@@ -19,7 +19,7 @@
 	}
 
 	# Заменить на реальный домен, если нужен редирект www -> apex.
-	@www host www.bradbarton.com
+	@www host www.bradbarton.link
 	@trailing path_regexp trailing ^(.+)/$
 	@asset path /_astro/*
 	@static path *.jpg *.jpeg *.png *.webp *.avif *.svg *.ico *.woff *.woff2 *.pdf
@@ -27,7 +27,7 @@
 
 	route {
 		respond /healthz "ok" 200
-		redir @www https://bradbarton.com{uri} permanent
+		redir @www https://bradbarton.link{uri} permanent
 		redir @trailing {re.trailing.1} permanent
 
 		encode zstd gzip

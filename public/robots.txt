@@ -28,4 +28,4 @@ User-agent: Google-Extended
 Allow: /
 
 # TODO: заменить домен при деплое
-Sitemap: https://bradbarton.com/sitemap-index.xml
+Sitemap: https://bradbarton.link/sitemap-index.xml
