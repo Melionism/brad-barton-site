@@ -27,5 +27,5 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-# TODO: заменить домен при деплое
+# Домен: bradbarton.link
 Sitemap: https://bradbarton.link/sitemap-index.xml

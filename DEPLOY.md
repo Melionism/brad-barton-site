@@ -26,7 +26,7 @@ SITE_URL=https://<домен> npm run build
 
 ## Перед публикацией
 
-1. Заменить плейсхолдер `bradbarton.com` на реальный домен в `Caddyfile` (редирект www → apex), `public/robots.txt` (Sitemap) и дефолте `SITE_URL` в `Dockerfile` / `astro.config.mjs`.
+1. Заменить плейсхолдер `bradbarton.link` на реальный домен в `Caddyfile` (редирект www → apex), `public/robots.txt` (Sitemap) и дефолте `SITE_URL` в `Dockerfile` / `astro.config.mjs`.
 2. Контент правится только в `src/content/site.ts`. Если клиент даст endpoint формы — вписать в `contact.formEndpoint` (пусто = только кнопки на каналы).
 3. Редиректы на уровне прокси: `http → https`, `www → apex`.
 4. После деплоя: Google Search Console → добавить домен → отправить `/sitemap-index.xml`.
