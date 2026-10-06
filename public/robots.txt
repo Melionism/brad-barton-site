@@ -28,4 +28,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Домен: bradbarton.link
-Sitemap: https://bradbarton.link/sitemap-index.xml
+Sitemap: https://bradbarton.link/sitemap.xml

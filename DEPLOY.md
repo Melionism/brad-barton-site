@@ -29,7 +29,7 @@ SITE_URL=https://<домен> npm run build
 1. Заменить плейсхолдер `bradbarton.link` на реальный домен в `Caddyfile` (редирект www → apex), `public/robots.txt` (Sitemap) и дефолте `SITE_URL` в `Dockerfile` / `astro.config.mjs`.
 2. Контент правится только в `src/content/site.ts`. Если клиент даст endpoint формы — вписать в `contact.formEndpoint` (пусто = только кнопки на каналы).
 3. Редиректы на уровне прокси: `http → https`, `www → apex`.
-4. После деплоя: Google Search Console → добавить домен → отправить `/sitemap-index.xml`.
+4. После деплоя: Google Search Console → добавить домен → отправить `/sitemap.xml`.
 5. Проверить превью ссылки (OG) через https://www.opengraph.xyz/ или отправив ссылку в Telegram.
 
 ## Что не сделано

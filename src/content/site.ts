@@ -30,13 +30,14 @@ export type SocialKey = keyof typeof socials;
 export const socialOrder: SocialKey[] = ['facebook', 'rumble', 'telegram', 'youtube'];
 
 export const nav = [
-  { label: 'Profile', href: '#profile' },
-  { label: 'Background', href: '#background' },
-  { label: 'Principles', href: '#principles' },
-  { label: 'Media', href: '#media' },
-  { label: 'Latest Posts', href: '#posts' },
-  { label: 'Follow', href: '#follow' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Profile', href: '/#profile' },
+  { label: 'Background', href: '/#background' },
+  { label: 'Principles', href: '/#principles' },
+  { label: 'Media', href: '/#media' },
+  { label: 'Latest Posts', href: '/#posts' },
+  { label: 'Follow', href: '/#follow' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const hero = {
@@ -45,7 +46,7 @@ export const hero = {
   tagline: ['Builder of people.', 'Ol’ Ball Coach.', 'Truth Teller.'],
   // B: 'Sharing ideas and conversations from Chattanooga, Tennessee.'
   lead: 'A husband, dad of three and former teacher and head boys basketball coach.',
-  primaryCta: { label: 'Watch the latest', href: '#media' },
+  primaryCta: { label: 'Watch the latest', href: '/#media' },
   secondaryCta: { label: 'Explore the archive', href: '#archive' },
   /** Официальное фото с atomgroup.io. Заменить на портрет от клиента, когда будет. */
   portrait: '/img/brad-portrait.webp',
@@ -240,6 +241,20 @@ export const contact = {
    * только кнопки на каналы. Email на сайте не публикуем (ТЗ Блок 10).
    */
   formEndpoint: '',
+};
+
+export const blog = {
+  /** Тексты страницы /blog. Сами посты — .md файлы в src/content/blog/ (шаблон: _TEMPLATE.md) */
+  title: 'Blog — Brad Barton',
+  description: 'Articles and thoughts from Brad Barton — faith, family, coaching and straight talk.',
+  label: 'Brad Barton',
+  heading: 'Blog',
+  text: 'Articles and thoughts from Brad Barton.',
+  /** Показывается, пока нет ни одного опубликованного поста */
+  emptyTitle: 'New articles are on the way',
+  emptyText: 'In the meantime, follow Brad on his official channels.',
+  /** Блок под каждым постом */
+  followHeading: 'Follow the conversation',
 };
 
 export const footer = {

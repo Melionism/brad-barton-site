@@ -26,6 +26,8 @@ npm run preview   # проверить сборку локально
 | Фото-архив | массив `archive.items`: `src`, `alt`, `caption`, `size` (wide/tall), `pos`. Файлы в `public/img/archive/` |
 | Посты Facebook (6–9 карточек) | массив `posts.items`: `date`, `type`, `excerpt` (короткий анонс), `url` на оригинал. Пусто — показывается ссылка на профиль |
 | Встроенное видео | `media.featured`: `{ platform: 'youtube' \| 'rumble', id, title }`. Только официальный embed и после разрешения |
+| Блог: новый пост | скопировать `src/content/blog/_TEMPLATE.md` в `src/content/blog/<адрес>.md` и заполнить (title, description, date, теги, обложка по желанию). Имя файла = адрес: `my-post.md` → `/blog/my-post`. `draft: true` — пост виден только в `npm run dev`. Обложки — в `public/img/blog/`, до 100 КБ |
+| Блог: тексты страницы /blog | объект `blog` |
 | Соцсети | объект `socials` |
 | Контакт-форма | `contact.formEndpoint` (Formspree / Web3Forms / свой). Пусто — только кнопки на каналы |
 | Title / description / OG-картинка | объект `site` |
@@ -50,6 +52,10 @@ src/
   lib/imgSize.ts       реальные размеры картинок на этапе сборки
   styles/global.css    токены, типографика, кнопки, карточки
   pages/index.astro    главная и 404
+  pages/blog/          лента /blog и страница поста /blog/<slug>
+  pages/sitemap.xml.ts карта сайта: главная, блог, все опубликованные посты
+  content/blog/        посты блога в markdown (+ _TEMPLATE.md, sample-post.md — черновик-пример)
+  content.config.ts    поля поста (схема)
 public/
   img/brad-portrait.webp, img/og-default.jpg, favicon.png, apple-touch-icon.png, robots.txt
 ```

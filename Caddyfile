@@ -28,6 +28,9 @@
 	route {
 		respond /healthz "ok" 200
 		redir @www https://bradbarton.link{uri} permanent
+		# старая карта сайта (до перехода на /sitemap.xml)
+		redir /sitemap-index.xml /sitemap.xml permanent
+		redir /sitemap-0.xml /sitemap.xml permanent
 		redir @trailing {re.trailing.1} permanent
 
 		encode zstd gzip
